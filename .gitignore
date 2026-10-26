@@ -1,0 +1,47 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local databases
+db.sqlite3
+db.sqlite3-journal
+
+# Uploaded personal media and documents
+media/
+
+# Collected static files
+staticfiles/
+
+# Test and coverage output
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Deployment secrets and backups
+*.sql
+*.bak
+backups/
+
+# Local backup copies of stylesheets
+*backup.css

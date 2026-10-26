@@ -1,0 +1,365 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Studio of Night Lord | Portfolio{% endblock %}
+{% block content %}
+<section class="hero section" aria-labelledby="hero-heading">
+  <div class="hero-glow hero-glow-one"></div>
+  <div class="hero-glow hero-glow-two"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="status-dot"></span> {% if profile and profile.available_for_work %}Available
+        for opportunities{% else %}Welcome to my digital studio{% endif %}</span>
+      <p class="overline">FULL-STACK DEVELOPMENT · DESIGN · IDEAS</p>
+      <h1 id="hero-heading">Code after dark.<br><span>Ideas into impact.</span></h1>
+      <p class="hero-intro">I'm <strong>{% if profile %}{{ profile.full_name }}{% else %}Your Name{% endif %}</strong>{% if profile and profile.headline %}, {{ profile.headline }}{% endif %}. {% if profile and profile.introduction %}{{ profile.introduction }}{% else %}I build purposeful digital experiences, combining thoughtful design with reliable engineering.{% endif %}</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#work">Explore projects <span aria-hidden="true">↗</span></a>
+        <a class="button button-outline" href="#contact">Get in touch</a>
+      </div>
+      <div class="hero-mini"><span class="hero-mini-line"></span> Crafting ideas into experiences</div>
+    </div>
+    {% if profile and profile.portrait_primary %}
+      <div
+        class="portrait-carousel"
+        data-portrait-carousel
+        data-primary-src="{{ profile.portrait_primary.url }}"
+        data-secondary-src="{% if profile.portrait_secondary %}{{ profile.portrait_secondary.url }}{% endif %}"
+        data-primary-alt="Portrait of {{ profile.full_name }} wearing a dark blazer"
+        data-secondary-alt="Portrait of {{ profile.full_name }} wearing a white shirt and glasses"
+      >
+
+        <div
+          class="portrait-stage"
+          data-portrait-stage
+          tabindex="0"
+          role="group"
+          aria-label="Portrait gallery. Use the left and right arrow keys to change photos."
+        >
+          <img
+            class="portrait-image"
+            data-portrait-image
+            src="{{ profile.portrait_primary.url }}"
+            alt="Portrait of {{ profile.full_name }} wearing a dark blazer"
+          >
+
+          <span class="portrait-hover-label" aria-hidden="true">
+            Hover to explore ↗
+          </span>
+        </div>
+
+        <div class="portrait-controls">
+          <button
+            class="portrait-control"
+            type="button"
+            data-portrait-prev
+            aria-label="Previous portrait"
+          >←</button>
+
+          <span class="portrait-counter" data-portrait-counter aria-live="polite">
+            01 / {% if profile.portrait_secondary %}02{% else %}01{% endif %}
+          </span>
+
+          <button
+            class="portrait-control"
+            type="button"
+            data-portrait-next
+            aria-label="Next portrait"
+            {% if not profile.portrait_secondary %}disabled{% endif %}
+          >→</button>
+        </div>
+
+        <div
+          class="portrait-preview"
+          data-portrait-preview
+          aria-hidden="true"
+          hidden
+        >
+          <button
+            class="portrait-preview-backdrop"
+            type="button"
+            data-portrait-close
+            aria-label="Close enlarged portrait"
+            tabindex="-1"
+          ></button>
+
+          <div
+            class="portrait-preview-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Enlarged portrait preview"
+          >
+            <button
+              class="portrait-preview-close"
+              type="button"
+              data-portrait-close
+              aria-label="Close preview"
+            >×</button>
+
+            <img
+              class="portrait-preview-image"
+              data-portrait-preview-image
+              src="{{ profile.portrait_primary.url }}"
+              alt="Portrait of {{ profile.full_name }} wearing a dark blazer"
+            >
+
+            <p class="portrait-preview-hint">
+              Move away or press Escape to close
+            </p>
+          </div>
+        </div>
+
+      </div>
+    {% else %}
+    <div class="hero-art" aria-label="Decorative geometric monogram artwork" role="img">
+      <div class="art-orbit orbit-one"></div>
+      <div class="art-orbit orbit-two"></div>
+      <div class="art-square square-one"></div>
+      <div class="art-square square-two"></div>
+      <div class="art-core"><span class="art-n">N</span><span class="art-dot">.</span></div>
+      <div class="art-tiny art-tiny-one"></div>
+      <div class="art-tiny art-tiny-two"></div>
+      <span class="art-caption art-caption-top">EST. AFTER DARK</span>
+      <span class="art-caption art-caption-bottom">STUDIO / 001</span>
+    </div>
+    {% endif %}
+  </div>
+  <div class="container hero-bottom"><span>SCROLL TO DISCOVER</span><span class="scroll-line"
+      aria-hidden="true"></span><span>01 / THE STUDIO</span></div>
+</section>
+
+<section class="section section-alt" id="about" aria-labelledby="about-heading">
+  <div class="container two-column">
+    <div>
+      <p class="section-kicker">01 / ABOUT ME</p>
+      <h2 id="about-heading">The person <span>behind the projects.</span></h2>
+    </div>
+
+    <div class="section-prose">
+      {% if profile and profile.about %}
+        <div class="readable-copy">{{ profile.about|linebreaks }}</div>
+      {% else %}
+        <p>
+          Welcome to Studio of Night Lord. This space brings together
+          engineering, creativity, and curiosity.
+        </p>
+      {% endif %}
+
+      {% if profile and profile.location %}
+        <p class="detail-line">⌁ Based in {{ profile.location }}</p>
+      {% endif %}
+
+      {% if profile and profile.resume %}
+      <a class="resume-card" href="{{ profile.resume.url }}" target="_blank" rel="noopener noreferrer"
+        aria-label="View resume PDF in a new tab">
+        <span class="resume-card-icon" aria-hidden="true">
+          <span>PDF</span>
+        </span>
+        <span class="resume-card-content">
+          <strong>My resume</strong>
+          <small>PDF document · View online</small>
+          <span class="resume-card-action">View resume ↗</span>
+        </span>
+        <span class="resume-card-arrow" aria-hidden="true">↗</span>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" aria-labelledby="skills-heading">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">02 / THE TOOLKIT</p>
+        <h2 id="skills-heading">Skills & <span>technologies.</span></h2>
+      </div>
+      <p class="section-aside">Tools I use to turn complex problems into straightforward solutions.</p>
+    </div>
+    <div class="skill-grid">
+      {% for skill in skills %}
+      <div class="skill-pill"><span class="skill-icon" aria-hidden="true">✦</span>
+        <div><strong>{{ skill.name }}</strong><small>{{ skill.get_category_display }}</small></div>
+      </div>
+      {% empty %}
+      <p class="empty-state">Add your first skills in Django Admin to display them here.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="work" aria-labelledby="work-heading">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">03 / SELECTED WORK</p>
+        <h2 id="work-heading">Built with <span>intention.</span></h2>
+      </div>
+      <div class="section-head-actions">
+        <p class="section-aside">A selection of projects, experiments, and ideas brought to life.</p>
+        <div class="rail-controls" data-rail-controls="projects" hidden>
+          <button class="rail-control" type="button" data-rail-prev aria-label="Scroll projects left" disabled>←</button>
+          <button class="rail-control" type="button" data-rail-next aria-label="Scroll projects right" disabled>→</button>
+        </div>
+      </div>
+    </div>
+    <div class="project-grid content-rail" id="project-rail" data-content-rail="projects" tabindex="0" role="region" aria-label="Project cards. Use left and right arrow keys to scroll horizontally.">
+      {% for project in projects %}
+      <article class="project-card">
+        <a class="project-picture" href="{% url 'portfolio:project_detail' project.slug %}"
+          aria-label="View {{ project.title }}">
+          {% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }} project preview"
+            loading="lazy">
+          {% else %}<div class="project-placeholder"><span>{{ project.title|first|upper }}</span><span
+              class="project-placeholder-accent">✧</span></div>{% endif %}
+          {% if project.featured %}<span class="featured-chip">FEATURED</span>{% endif %}
+        </a>
+        <div class="project-content">
+          <div class="project-topline"><span>PROJECT / {{ forloop.counter|stringformat:"02d" }}</span><span
+              class="project-arrow" aria-hidden="true">↗</span></div>
+          <h3><a href="{% url 'portfolio:project_detail' project.slug %}">{{ project.title }}</a></h3>
+          <p>{{ project.summary }}</p>
+          {% if project.technologies %}<div class="tech-label">{{ project.technologies }}</div>{% endif %}
+        </div>
+      </article>
+      {% empty %}
+      <div class="empty-state empty-card">Your project collection starts here. Add a project in Django Admin and it will
+        appear automatically.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="journey" aria-labelledby="journey-heading">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">04 / BACKGROUND</p>
+        <h2 id="journey-heading">The journey <span>so far.</span></h2>
+      </div>
+      <p class="section-aside">Experience, learning, and milestones along the way.</p>
+    </div>
+    <div class="journey-grid">
+      <div class="journey-panel">
+        <h3>Experience <span>↗</span></h3>
+        {% for item in experiences %}<div class="timeline-item">
+          <h4>{{ item.role }}</h4>
+          <p class="timeline-meta">{{ item.company }}{% if item.start_date %} · {{ item.start_date|date:"M Y" }} — {% if item.end_date %}{{ item.end_date|date:"M Y" }}{% else %}Present{% endif %}{% endif %}</p>{% if item.description %}<p>{{ item.description|truncatewords:35 }}</p>{% endif %}
+        </div>
+        {% empty %}<p class="empty-state">Work experience will appear here.</p>{% endfor %}
+      </div>
+      <div class="journey-panel">
+        <h3>Education <span>↗</span></h3>
+        {% for item in education_items %}<div class="timeline-item">
+          <h4>{{ item.degree }}</h4>
+          <p class="timeline-meta">{{ item.institution }}{% if item.period %} · {{ item.period }}{% endif %}</p>{% if item.description %}<p>{{ item.description|truncatewords:35 }}</p>{% endif %}
+        </div>
+        {% empty %}<p class="empty-state">Education details will appear here.</p>{% endfor %}
+      </div>
+    </div>
+    {% if certifications %}
+    <div class="certifications">
+      <div class="certifications-heading">
+        <h3>Certifications & recognition</h3>
+        <div class="rail-controls" data-rail-controls="certifications" hidden>
+          <button class="rail-control" type="button" data-rail-prev aria-label="Scroll certifications left" disabled>←</button>
+          <button class="rail-control" type="button" data-rail-next aria-label="Scroll certifications right" disabled>→</button>
+        </div>
+      </div>
+
+      <div class="cert-grid content-rail" id="certification-rail" data-content-rail="certifications" tabindex="0" role="region" aria-label="Certification cards. Use left and right arrow keys to scroll horizontally.">
+        {% for certificate in certifications %}
+        <div class="cert-item">
+
+          {% if certificate.image %}
+          <a href="{{ certificate.image.url }}" target="_blank" rel="noopener noreferrer">
+            <img class="cert-preview" src="{{ certificate.image.url }}" alt="{{ certificate.title }} certificate"
+              loading="lazy">
+          </a>
+          {% else %}
+          <span class="cert-icon">✳</span>
+          {% endif %}
+
+          <div>
+            <strong>{{ certificate.title }}</strong>
+            <small>
+              {{ certificate.issuer }}
+              {% if certificate.year %}
+              · {{ certificate.year }}
+              {% endif %}
+            </small>
+
+            <p class="cert-links">
+              {% if certificate.pdf_file %}
+              <a href="{{ certificate.pdf_file.url }}" target="_blank" rel="noopener noreferrer">
+                View PDF ↗
+              </a>
+              {% endif %}
+
+              {% if certificate.credential_url %}
+              <a href="{{ certificate.credential_url }}" target="_blank" rel="noopener noreferrer">
+                Verify credential ↗
+              </a>
+              {% endif %}
+            </p>
+          </div>
+
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section-alt contact-section" id="contact" aria-labelledby="contact-heading">
+  <div class="container contact-grid">
+    <div>
+      <p class="section-kicker">05 / LET'S CONNECT</p>
+      <h2 id="contact-heading">Have an idea?<br><span>Let's build it.</span></h2>
+      <p class="contact-intro">Questions, collaborations, or a project in mind? Send a message. I'll be glad to hear
+        from you.</p>
+      {% if profile and profile.email %}<a class="contact-email" href="mailto:{{ profile.email }}">{{ profile.email }}
+        ↗</a>{% endif %}
+      <div class="social-list">{% if profile and profile.github_url %}<a href="{{ profile.github_url }}" target="_blank"
+          rel="noopener noreferrer">GitHub ↗</a>{% endif %}{% if profile and profile.linkedin_url %}<a
+          href="{{ profile.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>{% endif %}{% for link in social_links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.platform }} ↗</a>{% endfor %}</div>
+    </div>
+    <div class="contact-form-card">
+      <h3>Send a message</h3>
+      <p>Fill out the form and your message will be saved securely in the portfolio database.</p>
+      {% if messages %}{% for message in messages %}<p class="form-notice" role="status">{{ message }}</p>{% endfor %}{% endif %}
+      <form method="post" action="{% url 'portfolio:home' %}#contact">
+        {% csrf_token %}
+        {{ form.website }}
+        {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+        <div class="form-row">
+          <div class="form-field">
+            <label for="{{ form.name.id_for_label }}">Your name</label>
+            {{ form.name }}
+            {{ form.name.errors }}
+          </div>
+
+          <div class="form-field">
+            <label for="{{ form.email.id_for_label }}">Email address</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="{{ form.subject.id_for_label }}">Subject</label>
+          {{ form.subject }}
+          {{ form.subject.errors }}
+        </div>
+
+        <div class="form-field">
+          <label for="{{ form.message.id_for_label }}">Message</label>
+          {{ form.message }}
+          {{ form.message.errors }}
+        </div>
+        <button class="button button-primary button-submit" type="submit">Send message <span
+            aria-hidden="true">↗</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

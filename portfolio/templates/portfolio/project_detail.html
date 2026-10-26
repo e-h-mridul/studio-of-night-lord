@@ -1,0 +1,18 @@
+{% extends "portfolio/base.html" %}
+{% block title %}{{ project.title }} | Studio of Night Lord{% endblock %}
+{% block content %}
+<section class="section detail-hero">
+  <div class="container">
+    <a class="text-link back-link" href="{% url 'portfolio:home' %}#work">← Back to all projects</a>
+    <p class="section-kicker">SELECTED WORK / PROJECT DETAIL</p>
+    <h1>{{ project.title }}</h1>
+    <p class="detail-summary">{{ project.summary }}</p>
+    <div class="detail-buttons">
+      {% if project.live_url %}<a class="button button-primary" href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer">Visit live project ↗</a>{% endif %}
+      {% if project.github_url %}<a class="button button-outline" href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer">View source code ↗</a>{% endif %}
+    </div>
+    <div class="detail-visual">{% if project.image %}<img src="{{ project.image.url }}" alt="Screenshot of {{ project.title }}">{% else %}<div class="project-placeholder detail-placeholder"><span>{{ project.title|first|upper }}</span><span class="project-placeholder-accent">✧</span></div>{% endif %}</div>
+    <div class="detail-body"><div><p class="section-kicker">THE STORY</p><h2>Behind the build<span>.</span></h2></div><div class="readable-copy">{% if project.description %}{{ project.description|linebreaks }}{% else %}<p>More project details coming soon.</p>{% endif %}{% if project.technologies %}<h3>Technology stack</h3><p>{{ project.technologies }}</p>{% endif %}</div></div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B1020">
+  <meta name="description" content="Studio of Night Lord — a developer portfolio featuring projects, skills and experience.">
+  <title>{% block title %}Studio of Night Lord{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+  <script src="{% static 'portfolio/js/main.js' %}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="container nav-shell">
+      <a class="brand" href="{% url 'portfolio:home' %}" aria-label="Studio of Night Lord homepage">
+        <span class="brand-mark" aria-hidden="true">N<span class="brand-mark-dot">.</span></span>
+        <span class="brand-label">STUDIO <span>OF NIGHT LORD</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-navigation" class="site-nav" aria-label="Main navigation">
+        <a href="{% url 'portfolio:home' %}#about">About</a>
+        <a href="{% url 'portfolio:home' %}#skills">Skills</a>
+        <a href="{% url 'portfolio:home' %}#work">Projects</a>
+        <a href="{% url 'portfolio:home' %}#journey">Journey</a>
+        <a class="nav-contact" href="{% url 'portfolio:home' %}#contact">Let's talk <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <a class="footer-brand" href="{% url 'portfolio:home' %}">Studio of Night Lord<span>.</span></a>
+      <p>Built with Django, MariaDB, and a little midnight magic.</p>
+      <a href="#top" class="back-top">Back to top ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
