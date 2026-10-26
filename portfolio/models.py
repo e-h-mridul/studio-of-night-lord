@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from .storage import RawUploadStorage
 
 
 class Profile(models.Model):
@@ -10,7 +11,11 @@ class Profile(models.Model):
     email = models.EmailField(blank=True)
     location = models.CharField(max_length=120, blank=True)
     available_for_work = models.BooleanField(default=True)
-    resume = models.FileField(upload_to="resumes/", blank=True)
+    resume = models.FileField(
+        upload_to="resumes/",
+        blank=True,
+        storage=RawUploadStorage(),
+    )
     portrait_primary = models.ImageField(
     upload_to="profile/portraits/",
     blank=True,
@@ -120,6 +125,7 @@ class Certification(models.Model):
         upload_to="certificates/pdfs/",
         blank=True,
         validators=[FileExtensionValidator(["pdf"])],
+        storage=RawUploadStorage(),
     )
 
     order = models.PositiveIntegerField(default=0)

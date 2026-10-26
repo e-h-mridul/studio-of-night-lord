@@ -1,0 +1,9 @@
+Django==5.2.18
+python-dotenv==1.2.4
+Pillow==13.0.0
+gunicorn
+whitenoise
+psycopg[binary]
+dj-database-url
+cloudinary
+django-cloudinary-storage
