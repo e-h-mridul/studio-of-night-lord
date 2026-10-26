@@ -61,7 +61,11 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # Enable HSTS only after HTTPS has been verified.
-SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_SECONDS = 3600
+
+# Leave these disabled for now
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
 # Cloudinary media storage — production only
 INSTALLED_APPS = list(INSTALLED_APPS)
